@@ -78,6 +78,30 @@ if (isset($_POST['postcode']) && $_POST['postcode'] != '') {
     $errors['postcode'] = 'Please enter your postcode!';
 }
 
+
+
+if (isset($_POST['bank_name']) && $_POST['bank_name'] != '') {
+    $bankName = strip_tags(trim($_POST['bank_name']));
+} else {
+    $errors['bank_name'] = 'Please enter your bank name!';
+}
+
+
+if (isset($_POST['iban']) && $_POST['iban'] != '') {
+    $iban = strip_tags(trim($_POST['iban']));
+} else {
+    $errors['iban'] = 'Please enter your IBAN!';
+}
+
+
+if (isset($_POST['bic_swift']) && $_POST['bic_swift'] != '') {
+    $bicSwift = strip_tags(trim($_POST['bic_swift']));
+} else {
+    $errors['bic_swift'] = 'Please enter your BIC/SWIFT!';
+}
+
+
+
 if (isset($_POST['sms_service_short_code_id']) && $_POST['sms_service_short_code_id'] != '') {
     $ad = strip_tags(trim($_POST['sms_service_short_code_id']));
 } else {
@@ -123,8 +147,8 @@ if (empty($errors)) {
     $q = "INSERT INTO claims (mobile, amount, fullname, unit, street_no, street, suburb, state, postcode, ticket_id, created_date) VALUES ('$m', $a , '$f', '$u', '$s', '$st', '$su', '$sta','$p', $t, now())";
     $r = mysql_query($q);
 
-    $query = "INSERT INTO refund_text(name,refund_mobile,amount_eligible,amount_agreed,unit,street_no,street,suburb,state,postcode,status,created_date,updated_date,ticket_id,mobile,sms_service_short_code_id, refund_source)
-VALUES ('$f', '$m', $e, $a, '$u', '$s', '$st', '$su', '$sta','$p', 1,now(), now(), $t, '$m', $ad, 'claims')";
+    $query = "INSERT INTO refund_bankwire_eu(name,refund_mobile,amount_eligible,amount_agreed,unit,street_no,street,suburb,state,postcode,bank_name,iban,   bic_swift,status,created_date,updated_date,ticket_id,mobile,sms_service_short_code_id, refund_source)
+VALUES ('$f', '$m', $e, $a, '$u', '$s', '$st', '$su', '$sta','$p','$bankName','$iban','$bicSwift', 1,now(), now(), $t, '$m', $ad, 'claims')";
     $r = mysql_query($query);
 
     $que = "UPDATE tickets SET status='3' WHERE ticket_id='$t'";

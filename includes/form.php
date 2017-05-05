@@ -281,7 +281,60 @@
                                                     <span class="help-block">
                                                         Provide your post code</span>
                                                 </div>
-                                            </div>                                            
+                                            </div>      
+
+                                            <hr/>    
+
+                                             <div class="form-group">
+                                                <label class="control-label col-md-3">Bank name
+                                                    <span class="required">
+                                                        *
+                                                    </span>
+                                                </label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="bank_name" maxlength="100"/>
+                                                    <span class="help-block">
+                                                        Provide your bank name</span>
+
+
+                                                </div>
+                                            </div> 
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">IBAN
+                                                    <span class="required">
+                                                        *
+                                                    </span>
+                                                </label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="iban" maxlength="100"/>
+                                                    <span class="help-block">
+                                                        Provide your IBAN</span>
+                                                </div>
+                                                  <div class="col-md-2">
+                                                    <a href="https://boi.achta.com/FinancePlatform" target="_blank" class="">
+                                                    Look up your IBAN <span class="glyphicon-class glyphicon glyphicon-question-sign"></span>
+                                                    </a>
+                                                </div>
+                                            </div>                   
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">BIC/SWIFT
+                                                    <span class="required">
+                                                        *
+                                                    </span>
+                                                </label>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" name="bic_swift" maxlength="100"/>
+                                                    <span class="help-block">
+                                                        Provide your BIC/SWIFT</span>
+                                                </div>
+                                                 <div class="col-md-2">
+                                                    <a href="https://www.theswiftcodes.com/ireland" target="_blank" class="">
+                                                    Look up your BIC <span class="glyphicon-class glyphicon glyphicon-question-sign"></span>
+                                                    </a>
+                                                </div>
+                                            </div>                                                          
 
                                         </div>
                                         <div class="tab-pane" id="tab3">
@@ -355,6 +408,28 @@
                                                 <label class="control-label col-md-3">Postcode</label>
                                                 <div class="col-md-4">
                                                     <p class="form-control-static" data-display="postcode" id="postcode">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <h4 class="form-section">Bank Account Details</h4>
+                                             <div class="form-group">
+                                                <label class="control-label col-md-3">Bank name </label>
+                                                <div class="col-md-4">
+                                                    <p class="form-control-static" data-display="bank_name" id="bank_name">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                                <label class="control-label col-md-3">IBAN</label>
+                                                <div class="col-md-4">
+                                                    <p class="form-control-static" data-display="iban" id="iban">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                                <label class="control-label col-md-3">BIC/SWIFT</label>
+                                                <div class="col-md-4">
+                                                    <p class="form-control-static" data-display="bic_swift" id="bic_swift">
                                                     </p>
                                                 </div>
                                             </div>

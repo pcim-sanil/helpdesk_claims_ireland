@@ -69,6 +69,18 @@ var FormWizard = function () {
                         minlength: 3,
                         maxlength: 50,
                     },
+                    bank_name: {
+                        required: true,
+                        maxlength: 100,
+                    },
+                    iban: {
+                        required: true,
+                        maxlength: 100,
+                    },
+                    bic_swift: {
+                        required: true,
+                        maxlength: 100,
+                    },
                     'agreement': {
                         required: true,
                         minlength: 1
