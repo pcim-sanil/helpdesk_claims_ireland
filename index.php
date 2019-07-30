@@ -11,8 +11,8 @@ if (filter_var($_GET['id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
 
     $q = "SELECT caller_number,eligible_amount,propose_amount,ticket_id, created_date, claimed_on from email where userkey = $id ";
 
-    $result = mysql_query($q);
-    $row    = mysql_fetch_array($result);
+    $result = mysqli_query($link, $q);
+    $row    = mysqli_fetch_array($result);
 
     if (!empty($row)) {
 
@@ -26,10 +26,10 @@ if (filter_var($_GET['id'], FILTER_VALIDATE_INT, array('min_range' => 1))) {
         /**
          * Check if link has expired
          */
-        $expiryCheckQuery = "SELECT caller_number,eligible_amount,propose_amount,ticket_id,created_date, claimed_on from email where userkey = $id AND created_date > DATE_SUB(NOW(), INTERVAL 48 HOUR)";
+        $expiryCheckQuery = "SELECT caller_number,eligible_amount,propose_amount,ticket_id,created_date, claimed_on from email where userkey = $id AND created_date > DATE_SUB(NOW(), INTERVAL 168 HOUR)";
 
-        $r1  = mysql_query($expiryCheckQuery);
-        $rw1 = mysql_fetch_array($r1);
+        $r1  = mysqli_query($link,$expiryCheckQuery);
+        $rw1 = mysqli_fetch_array($r1);
 
         if (empty($rw1)) {
             include 'includes/header.php';

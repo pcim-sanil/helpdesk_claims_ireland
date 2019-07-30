@@ -12,8 +12,6 @@ $u      = '';
 
 if (isset($_POST['mobile']) && $_POST['mobile'] != '' && preg_match("/^[0-9]+$/", $_POST['mobile'])) {
     $m = strip_tags(trim($_POST['mobile']));
-    $suffix = substr($m, -10);
-    $m      = '44' . $suffix;
 } else {
     $errors['mobile'] = 'Please enter a valid mobile number!';
 }
@@ -114,8 +112,8 @@ if (empty($errors)) {
 
     $q = "SELECT caller_number,eligible_amount,propose_amount,ticket_id, created_date, claimed_on from email where userkey='" . $_SESSION['id']."'";
 
-    $result = mysql_query($q);
-    $row    = mysql_fetch_array($result);
+    $result = mysqli_query($link,$q);
+    $row    = mysqli_fetch_array($result);
 
     if (!empty($row)) {
 
@@ -126,10 +124,10 @@ if (empty($errors)) {
         /**
          * Check if link has expired
          */
-        $expiryCheckQuery = "SELECT caller_number,eligible_amount,propose_amount,ticket_id,created_date, claimed_on from email where userkey = '" . $_SESSION['id']."' AND created_date > DATE_SUB(NOW(), INTERVAL 48 HOUR)";
+        $expiryCheckQuery = "SELECT caller_number,eligible_amount,propose_amount,ticket_id,created_date, claimed_on from email where userkey = '" . $_SESSION['id']."' AND created_date > DATE_SUB(NOW(), INTERVAL 168 HOUR)";
 
-        $r1  = mysql_query($expiryCheckQuery);
-        $rw1 = mysql_fetch_array($r1);
+        $r1  = mysqli_query($link,$expiryCheckQuery);
+        $rw1 = mysqli_fetch_array($r1);
 
         if (empty($rw1)) {
             exit('EXPIRED');
@@ -145,21 +143,21 @@ if (empty($errors)) {
     // OK to proceed!
     // Add the page to the database:
     $q = "INSERT INTO claims (mobile, amount, fullname, unit, street_no, street, suburb, state, postcode, ticket_id, created_date) VALUES ('$m', $a , '$f', '$u', '$s', '$st', '$su', '$sta','$p', $t, now())";
-    $r = mysql_query($q);
+    $r = mysqli_query($link,$q);
 
     $query = "INSERT INTO refund_bankwire_eu(name,refund_mobile,amount_eligible,amount_agreed,unit,street_no,street,suburb,state,postcode,bank_name,iban,   bic_swift,status,created_date,updated_date,ticket_id,mobile,sms_service_short_code_id, refund_source)
 VALUES ('$f', '$m', $e, $a, '$u', '$s', '$st', '$su', '$sta','$p','$bankName','$iban','$bicSwift', 1,now(), now(), $t, '$m', $ad, 'claims')";
-    $r = mysql_query($query);
+    $r = mysqli_query($link,$query);
 
     $que = "UPDATE tickets SET status='3' WHERE ticket_id='$t'";
-    $ret = mysql_query($que);
+    $ret = mysqli_query($link,$que);
 
     /**
      * mark email has claimed;
      */
     
     $markclaimedquery = "UPDATE email SET claimed_on='" . date('Y-m-d H:i:s') . "' WHERE userkey='" . $_SESSION['id']."'";
-    $resmarkedclaim   = mysql_query($markclaimedquery);
+    $resmarkedclaim   = mysqli_query($link,$markclaimedquery);
 
     // Clear $_POST:
     $_POST = array();
